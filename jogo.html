@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10161c">
+  <meta name="description" content="Monkey Gravity: atravesse a estação e escape em dupla.">
+  <title>Monkey Gravity | Missão</title>
+  <link rel="stylesheet" href="css/base.css?v=2">
+  <link rel="stylesheet" href="css/jogo.css?v=3">
+  <script type="module" src="js/jogo.js"></script>
+</head>
+<body class="page-game">
+  <header class="game-header">
+    <a class="brand brand-compact" href="index.html" aria-label="Voltar ao início"><span class="brand-monkey">MONKEY</span><span class="brand-gravity"><span>GR</span><span class="brand-orbit">A</span><span>VITY</span></span></a>
+    <div class="level-heading"><span class="eyebrow">ESTAÇÃO ORBITAL 07</span><h1 id="level-title">SELEÇÃO DE FASE</h1></div>
+    <nav class="game-actions" aria-label="Ações da partida">
+      <button id="restart-button" class="icon-button" type="button" aria-label="Reiniciar fase" title="Reiniciar (R)">↻</button>
+      <button id="pause-button" class="icon-button" type="button" aria-label="Pausar partida" aria-pressed="false" title="Pausar (Esc)">Ⅱ</button>
+      <a class="text-link" href="index.html">SAIR DA MISSÃO</a>
+    </nav>
+  </header>
+
+  <main class="game-shell">
+    <p id="name-error" class="name-error" role="alert" hidden>Os nomes da dupla não foram informados ou são inválidos. <a href="index.html">Voltar à preparação</a></p>
+    <div id="game-app" class="game-app" hidden>
+      <div class="play-grid">
+        <section class="play-column" aria-label="Área de jogo">
+          <div class="game-frame">
+            <canvas id="game-canvas" width="1280" height="720" aria-label="Jogo de plataforma cooperativo Monkey Gravity"></canvas>
+            <div class="canvas-topline"><span id="phase-kicker">SETOR 01</span><span id="gravity-status">↓ AZUL <i></i> ↑ VERMELHO</span></div>
+            <div class="canvas-bottomline"><span id="objective-text">Aguarde a inicialização da missão.</span><span class="live-indicator"><i></i> SIMULAÇÃO ATIVA</span></div>
+            <section id="screen-selection" class="game-screen" aria-labelledby="selection-title" hidden>
+              <div class="screen-card selection-card"><p class="eyebrow">TRIPULAÇÃO: <span id="selection-names"></span></p><h2 id="selection-title">Escolha o setor</h2><p>Uma missão só termina quando os dois chegam juntos.</p><div id="level-options" class="level-options"></div><a class="screen-back" href="index.html">← ALTERAR TRIPULAÇÃO</a></div>
+            </section>
+            <section id="screen-pause" class="game-screen" aria-labelledby="pause-title" hidden>
+              <div class="screen-card pause-card"><p class="eyebrow">SIMULAÇÃO CONGELADA</p><h2 id="pause-title">Pausa de segurança</h2><p>Física e temporizadores estão suspensos.</p><div class="screen-buttons"><button id="resume-button" class="button button-launch" type="button">RETOMAR MISSÃO</button><button id="pause-restart-button" class="button button-quiet" type="button">REINICIAR FASE</button></div><button id="pause-settings-toggle" class="screen-back" type="button" aria-expanded="false">CONFIGURAÇÕES <span>+</span></button></div>
+            </section>
+            <section id="screen-complete" class="game-screen" aria-labelledby="complete-title" hidden>
+              <div class="screen-card result-card"><p class="eyebrow">DUpla CONFIRMADA · SETOR <span id="result-sector"></span></p><h2 id="complete-title">Fase concluída</h2><p id="result-copy">A passagem está segura. A próxima área foi liberada.</p><div class="screen-buttons"><button id="next-button" class="button button-launch" type="button">PRÓXIMA FASE <span class="button-arrow">↗</span></button><button id="replay-button" class="button button-quiet" type="button">JOGAR NOVAMENTE</button></div><a class="screen-back" href="index.html">VOLTAR AO MENU</a></div>
+            </section>
+            <section id="screen-ending" class="game-screen" aria-labelledby="ending-title" hidden>
+              <div class="screen-card result-card"><p class="eyebrow">MISSÃO CUMPRIDA · ESTAÇÃO RESTAURADA</p><h2 id="ending-title">Ninguém ficou para trás.</h2><p>A dupla escapou. Cinco de cinco setores concluídos.</p><div class="screen-buttons"><button id="ending-replay-button" class="button button-launch" type="button">JOGAR NOVAMENTE</button><a class="button button-quiet" href="index.html">VOLTAR AO MENU</a></div></div>
+            </section>
+            <section id="screen-failure" class="game-screen failure-screen" aria-live="assertive" hidden><div class="failure-label">CONTATO ELÉTRICO · REINICIANDO SETOR</div></section>
+          </div>
+          <div class="game-caption"><span id="phase-description">CONTROLES INDEPENDENTES · COOPERAÇÃO NECESSÁRIA</span><span>R REINICIA <b>·</b> ESC PAUSA</span></div>
+        </section>
+
+        <aside class="score-column" aria-label="Placar da dupla">
+          <section class="scoreboard" aria-labelledby="score-title">
+            <div class="section-cap"><span>PLACAR DA DUPLA</span><span class="provisional-dot"></span></div>
+            <h2 id="score-title">EM MISSÃO</h2>
+            <div class="score-player player-blue" id="blue-score-card">
+              <div class="score-avatar avatar-blue" aria-hidden="true">01</div><div class="score-player-info"><span class="score-name" id="blue-name">JOGADOR AZUL</span><span class="gravity-indicator gravidade-baixo" id="blue-gravity"><span class="gravity-arrow">↓</span><span class="gravity-label">GRAVIDADE PARA BAIXO</span></span></div><strong class="score-value" id="blue-score">0</strong>
+            </div>
+            <div class="score-player player-red" id="red-score-card">
+              <div class="score-avatar avatar-red" aria-hidden="true">02</div><div class="score-player-info"><span class="score-name" id="red-name">JOGADOR VERMELHO</span><span class="gravity-indicator gravidade-cima" id="red-gravity"><span class="gravity-arrow">↑</span><span class="gravity-label">GRAVIDADE PARA CIMA</span></span></div><strong class="score-value" id="red-score">0</strong>
+            </div>
+            <div class="team-total"><span>TOTAL DA EQUIPE</span><strong id="team-score">0</strong></div>
+            <p id="score-note" class="score-note">Pontos provisórios aparecem durante a tentativa.</p>
+          </section>
+          <section class="history-panel" aria-labelledby="history-title">
+            <div class="section-cap"><span>REGISTRO DE BORDO</span><span id="history-count">0</span></div>
+            <div class="panel-title-row"><h2 id="history-title">Fases concluídas</h2><button id="clear-history" class="small-action" type="button" disabled>Limpar</button></div>
+            <p class="table-note">Excluir registros altera apenas esta tabela, não o placar nem o progresso.</p>
+            <div class="table-wrap"><table>
+              <caption class="visually-hidden">Histórico de fases concluídas nesta sessão</caption>
+              <thead><tr><th scope="col">Fase</th><th scope="col" id="th-blue">Azul</th><th scope="col" id="th-red">Vermelho</th><th scope="col">Equipe</th><th scope="col"><span class="visually-hidden">Ação</span></th></tr></thead>
+              <tbody id="history-body"></tbody>
+            </table></div>
+            <p id="history-empty" class="empty-state">Nenhuma fase concluída nesta sessão.</p>
+          </section>
+        </aside>
+      </div>
+
+      <div class="lower-grid">
+        <section class="activity-panel" aria-labelledby="activity-title">
+          <div class="section-cap"><span>CANAL DE OPERAÇÕES</span><span id="activity-count">0 / 8</span></div>
+          <div class="panel-title-row"><h2 id="activity-title">Acontecimentos recentes</h2><button id="clear-activity" class="small-action" type="button" disabled>Limpar</button></div>
+          <ul id="activity-list" class="activity-list" aria-live="polite" aria-relevant="additions removals"></ul>
+          <p id="activity-empty" class="empty-state">Aguardando atividade da tripulação.</p>
+        </section>
+        <details class="game-settings" id="game-settings">
+          <summary>Configurações de controle <span aria-hidden="true">+</span></summary>
+          <div class="disclosure-content settings-content">
+            <label class="setting-row" for="volume-setting"><span>Volume</span><input id="volume-setting" type="range" min="0" max="100" value="35"><output id="volume-output" for="volume-setting">35%</output></label>
+            <label class="setting-check" for="motion-setting"><input id="motion-setting" type="checkbox"><span>Reduzir animações</span></label>
+            <p class="setting-subtitle">ATALHOS · SELECIONE UM BOTÃO E PRESSIONE UMA TECLA</p>
+            <div class="key-settings">
+              <button type="button" class="key-bind key-blue" data-bind="blueLeft" aria-label="Alterar tecla mover à esquerda, Azul">A</button><button type="button" class="key-bind key-blue" data-bind="blueRight" aria-label="Alterar tecla mover à direita, Azul">D</button><button type="button" class="key-bind key-blue" data-bind="blueJump" aria-label="Alterar tecla pular, Azul">W</button><button type="button" class="key-bind key-blue" data-bind="blueInteract" aria-label="Alterar tecla interagir, Azul">E</button>
+              <button type="button" class="key-bind key-red" data-bind="redLeft" aria-label="Alterar tecla mover à esquerda, Vermelho">←</button><button type="button" class="key-bind key-red" data-bind="redRight" aria-label="Alterar tecla mover à direita, Vermelho">→</button><button type="button" class="key-bind key-red" data-bind="redJump" aria-label="Alterar tecla pular, Vermelho">↑</button><button type="button" class="key-bind key-red" data-bind="redInteract" aria-label="Alterar tecla interagir, Vermelho">Enter</button>
+            </div>
+            <button type="button" id="save-settings" class="button button-quiet">SALVAR CONFIGURAÇÕES</button><p id="settings-message" class="settings-message" aria-live="polite"></p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </main>
+  <footer class="game-footer"><a href="index.html">MONKEY GRAVITY</a><span>UMA MISSÃO COOPERATIVA PARA DUAS PESSOAS</span><span>ARQUIVO DE BORDO · V 1.0</span></footer>
+</body>
+</html>

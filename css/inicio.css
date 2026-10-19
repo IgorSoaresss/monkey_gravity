@@ -1,0 +1,49 @@
+.page-home { min-height: 100vh; background-color: var(--ink); background-image: linear-gradient(#ffffff07 1px, transparent 1px), linear-gradient(90deg, #ffffff07 1px, transparent 1px); background-size: 48px 48px; }
+.page-home::before { position: fixed; z-index: -1; inset: 0; background: radial-gradient(ellipse at 28% 48%, #263c45a8, transparent 52%), linear-gradient(90deg, #10161c 0%, #10161c22 62%, #10161c 100%); content: ""; }
+.site-header { position: relative; z-index: 1; background: #10161ce6; }
+.home-main { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(360px, .8fr); column-gap: clamp(56px, 10vw, 154px); row-gap: 34px; width: min(1100px, calc(100% - 48px)); min-height: calc(100vh - 145px); align-content: center; margin: 0 auto; padding: 54px 0 46px; }
+.home-copy { position: relative; align-self: center; padding: 16px 0 30px; }
+.eyebrow { margin: 0; color: var(--signal); }
+.home-copy .eyebrow span { padding: 0 7px; color: var(--red); }
+.home-copy h1 { margin: 26px 0 20px; color: var(--paper); font-family: var(--display); font-size: clamp(46px, 6vw, 78px); font-weight: 900; line-height: .98; letter-spacing: 0; }
+.home-description { max-width: 380px; margin: 0; color: #b5c1c2; font-size: 13px; line-height: 1.8; }
+.mission-stamp { display: flex; width: max-content; align-items: center; gap: 13px; margin-top: 42px; border-top: 1px solid #89979855; padding-top: 13px; }
+.stamp-number { color: var(--red); font-family: var(--display); font-size: 36px; font-weight: 900; line-height: 1; }
+.stamp-label, .stamp-caption { color: var(--muted); font-size: 9px; line-height: 1.5; }
+.stamp-rule { width: 1px; height: 30px; margin: 0 3px; background: var(--line); }
+.stamp-caption { color: var(--signal); }
+.launch-panel { position: relative; align-self: center; border: 1px solid #45545d; padding: 26px 28px 0; background: #131c23f2; box-shadow: 12px 12px 0 #0b101566; }
+.launch-panel::before { position: absolute; top: -1px; right: -1px; width: 42px; height: 42px; border-top: 2px solid var(--signal); border-right: 2px solid var(--signal); content: ""; }
+.panel-heading, .panel-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--muted); }
+.panel-signal { color: var(--signal); font-size: 9px; }
+.panel-signal::before { display: inline-block; width: 5px; height: 5px; margin-right: 6px; border-radius: 50%; background: var(--signal); content: ""; }
+.launch-panel h2 { margin: 19px 0 23px; font-family: var(--display); font-size: 24px; letter-spacing: 0; }
+.name-field { display: block; margin-bottom: 16px; }
+.field-label { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; color: var(--muted); font-size: 9px; letter-spacing: .08em; }
+.gravity-mini { margin-left: auto; color: var(--blue); font-size: 15px; }
+.field-red .gravity-mini { color: var(--red); }
+.name-field input { width: 100%; height: 44px; border: 1px solid #3a4952; border-radius: 0; padding: 0 12px; color: var(--paper); background: #0e151a; font-size: 12px; }
+.name-field input::placeholder { color: #78858b; }
+.name-field input:focus { border-color: var(--blue); outline: none; }
+.field-red input:focus { border-color: var(--red); }
+.form-error { min-height: 17px; margin: -7px 0 7px; color: var(--red); font-size: 10px; }
+.button-launch { width: 100%; }
+.panel-footer { min-height: 42px; margin-top: 8px; border-top: 1px solid #34434c; font-size: 8px; }
+.home-details { grid-column: 2; margin-top: -17px; }
+.info-disclosure { border-color: #45545d; }
+.site-footer { display: flex; justify-content: space-between; gap: 16px; min-height: 44px; align-items: center; border-top: 1px solid #34434c; padding: 0 clamp(20px, 5vw, 76px); color: #7f8c91; font-size: 8px; }
+.footer-mark { padding: 0 5px; color: var(--red); }
+
+@media (max-width: 760px) {
+  .site-header { min-height: 66px; padding-inline: 20px; }
+  .header-note { font-size: 8px; gap: 6px; }
+  .home-main { grid-template-columns: minmax(0, 1fr); width: min(520px, calc(100% - 36px)); min-height: auto; gap: 12px; padding: 35px 0 28px; }
+  .home-copy { padding: 5px 0; }
+  .home-copy h1 { margin: 18px 0 12px; font-size: clamp(42px, 11vw, 58px); }
+  .home-description { max-width: 330px; font-size: 12px; }
+  .mission-stamp { margin-top: 20px; }
+  .launch-panel { padding: 22px 18px 0; }
+  .home-details { grid-column: 1; margin-top: 12px; }
+  .site-footer { min-height: 54px; flex-wrap: wrap; padding: 10px 18px; font-size: 7px; }
+  .site-footer span:last-child { width: 100%; }
+}

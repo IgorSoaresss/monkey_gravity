@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10161c">
+  <meta name="description" content="Monkey Gravity: uma aventura espacial cooperativa para duas pessoas.">
+  <title>Monkey Gravity | Preparar missão</title>
+  <link rel="stylesheet" href="css/base.css?v=2">
+  <link rel="stylesheet" href="css/inicio.css">
+  <script type="module" src="js/inicio.js"></script>
+</head>
+<body class="page-home">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Monkey Gravity, início">
+      <span class="brand-monkey">MONKEY</span>
+      <span class="brand-gravity"><span>GR</span><span class="brand-orbit">A</span><span>VITY</span></span>
+    </a>
+    <span class="header-note"><span class="status-dot"></span> COOPERATIVO LOCAL <span class="header-separator">/</span> 2 JOGADORES</span>
+  </header>
+
+  <main class="home-main">
+    <section class="home-copy" aria-labelledby="home-title">
+      <p class="eyebrow">ESTAÇÃO ORBITAL 07 <span>·</span> SINAL DE EMERGÊNCIA</p>
+      <h1 id="home-title">A gravidade<br>virou contra nós.</h1>
+      <p class="home-description">Dois astronautas. Duas gravidades. Uma estação inteira entre vocês e a saída.</p>
+      <div class="mission-stamp" aria-label="Cinco fases cooperativas">
+        <span class="stamp-number">05</span>
+        <span class="stamp-label">FASES<br>COOPERATIVAS</span>
+        <span class="stamp-rule"></span>
+        <span class="stamp-caption">NINGUÉM FICA<br>PARA TRÁS</span>
+      </div>
+    </section>
+
+    <section class="launch-panel" aria-labelledby="launch-title">
+      <div class="panel-heading">
+        <span class="panel-index">01 / TRIPULAÇÃO</span>
+        <span class="panel-signal">SISTEMA ONLINE</span>
+      </div>
+      <h2 id="launch-title">Identifique a dupla</h2>
+      <form id="launch-form" action="jogo.html" novalidate>
+        <label class="name-field field-blue" for="player-blue">
+          <span class="field-label"><span class="player-chip chip-blue"></span> JOGADOR 01 <span class="gravity-mini">↓</span></span>
+          <input id="player-blue" name="jogador1" autocomplete="given-name" maxlength="20" placeholder="Nome do jogador azul" required>
+        </label>
+        <label class="name-field field-red" for="player-red">
+          <span class="field-label"><span class="player-chip chip-red"></span> JOGADOR 02 <span class="gravity-mini">↑</span></span>
+          <input id="player-red" name="jogador2" autocomplete="given-name" maxlength="20" placeholder="Nome do jogador vermelho" required>
+        </label>
+        <p id="form-error" class="form-error" role="alert" aria-live="polite"></p>
+        <button class="button button-launch" type="submit"><span>INICIAR MISSÃO</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+      </form>
+      <div class="panel-footer"><span>TECLADO COMPARTILHADO</span><span>SEM VIDAS. SEM PRESSA.</span></div>
+    </section>
+
+    <section class="home-details" aria-label="Informações da missão">
+      <details class="info-disclosure">
+        <summary>Como jogar <span aria-hidden="true">+</span></summary>
+        <div class="disclosure-content">
+          <p>Azul começa no piso; Vermelho, no teto. Cada pessoa controla seu astronauta. Ativem placas, atravessem as portas juntos e encontrem as saídas da mesma cor.</p>
+          <div class="control-pair"><span><i class="player-chip chip-blue"></i> AZUL</span><span>A / D mover · W pular · E interagir</span></div>
+          <div class="control-pair"><span><i class="player-chip chip-red"></i> VERMELHO</span><span>← / → mover · ↑ pular · Enter interagir</span></div>
+          <p>Esc pausa a partida. R reinicia a fase. Nos terminais, uma interação inverte a gravidade dos dois.</p>
+        </div>
+      </details>
+      <details class="info-disclosure settings-disclosure" id="settings-panel">
+        <summary>Configurações <span aria-hidden="true">+</span></summary>
+        <div class="disclosure-content settings-content">
+          <label class="setting-row" for="volume-setting"><span>Volume</span><input id="volume-setting" type="range" min="0" max="100" value="35"><output id="volume-output" for="volume-setting">35%</output></label>
+          <label class="setting-check" for="motion-setting"><input id="motion-setting" type="checkbox"><span>Reduzir animações</span></label>
+          <p class="setting-subtitle">ATALHOS · SELECIONE UM BOTÃO E PRESSIONE UMA TECLA</p>
+          <div class="key-settings">
+            <button type="button" class="key-bind key-blue" data-bind="blueLeft" aria-label="Alterar tecla mover à esquerda, Azul">A</button>
+            <button type="button" class="key-bind key-blue" data-bind="blueRight" aria-label="Alterar tecla mover à direita, Azul">D</button>
+            <button type="button" class="key-bind key-blue" data-bind="blueJump" aria-label="Alterar tecla pular, Azul">W</button>
+            <button type="button" class="key-bind key-blue" data-bind="blueInteract" aria-label="Alterar tecla interagir, Azul">E</button>
+            <button type="button" class="key-bind key-red" data-bind="redLeft" aria-label="Alterar tecla mover à esquerda, Vermelho">←</button>
+            <button type="button" class="key-bind key-red" data-bind="redRight" aria-label="Alterar tecla mover à direita, Vermelho">→</button>
+            <button type="button" class="key-bind key-red" data-bind="redJump" aria-label="Alterar tecla pular, Vermelho">↑</button>
+            <button type="button" class="key-bind key-red" data-bind="redInteract" aria-label="Alterar tecla interagir, Vermelho">Enter</button>
+          </div>
+          <button type="button" id="save-settings" class="button button-quiet">SALVAR CONFIGURAÇÕES</button>
+          <p id="settings-message" class="settings-message" aria-live="polite"></p>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>MONKEY GRAVITY <span class="footer-mark">◆</span> MISSÃO DE RESGATE 07</span><span>PROJETADO PARA DUAS PESSOAS, NO MESMO TECLADO.</span></footer>
+</body>
+</html>
